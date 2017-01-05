@@ -18,35 +18,33 @@ QRCodeDraw.prototype = {
         }
         try {
             var qr = new QRCodeLib(8, 2);
-            var width = 0;
-            var bits;
-            var bitc = 0;
+            var rl = 0;
+            var cl = 0;
+            var bytes;
+            var bytec = 0;
 
             qr.addData(text);
             qr.make();
 
-            width = this.dataWidth(qr, 1);
-            bits = new Array(width * width);
-            
-            // TODO: convert to bytes
-            for (var r = 0, rl = qr.getModuleCount(); r < rl; r++) {
-                for (var c = 0, cl = qr.getModuleCount(); c < cl; c++) {
-                    if (qr.isDark(r, c)) {
-                        bits[bitc] = 1;
-                    } else {
-                        bits[bitc] = 0;
+            cl = qr.getModuleCount();
+            rl = Math.floor(cl / 8);
+            bytes = new Array(rl * cl);
+
+            for (var r = 0; r < rl; r++) {
+                for (var c = 0; c < cl; c++) {
+                    var byte = 0;
+                    var s = r * 8;
+                    for (var p = s + 7; p >=  s; p--) {
+                        byte = (byte << 1) | qr.isDark(p, c);
                     }
-                    bitc++;
+                    bytes[bytec] = byte;
+                    bytec++;
                 }
             }
         } catch (e) {
             error = e;
             console.error(e.stack);
         }
-        cb(error, bits, width);
-    },
-
-    dataWidth: function (qr, scale) {
-        return qr.getModuleCount() * (scale || this.scale || 4)
+        cb({qrcode: bytes, height: rl, width: cl});
     },
 }

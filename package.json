@@ -1,7 +1,22 @@
 {
-  "name": "ruff_qr",
-  "description": "",
-  "version": "",
-  "author": "",
-  "main": "index.js"
+  "name": "ruff_qrcode",
+  "version": "0.0.1",
+  "description": "qr code generator for oled on ruff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sorosliu1029/Ruff_QR_Code.git"
+  },
+  "keywords": [
+    "qrcode"
+  ],
+  "author": "Soros Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sorosliu1029/Ruff_QR_Code/issues"
+  },
+  "homepage": "https://github.com/Sorosliu1029/Ruff_QR_Code#readme"
 }
