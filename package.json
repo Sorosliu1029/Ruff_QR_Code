@@ -1,7 +1,7 @@
 {
   "name": "ruff_qrcode",
   "version": "0.0.1",
-  "description": "qr code generator for oled on ruff",
+  "description": "Qrcode generation module for OLED on Ruff",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
