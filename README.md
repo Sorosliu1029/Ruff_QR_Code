@@ -62,6 +62,10 @@ generate qrcode from text, and display qrcode in callback function
     
     The text could contain **32** characters at maximum.
     
+4. How long does it take to generate qrcode?
+
+    It takes about **7** seconds to generate qrcode.
+    
 ## License
 
 The MIT License (MIT)
