@@ -2,9 +2,9 @@ var QRCodeLib = require('./qrcode-draw');
 var QRCodeDraw = QRCodeLib.QRCodeDraw;
 function drawBitArray(text, cb) {
     var drawInstance = new QRCodeDraw();
-    drawInstance.drawBitArray(text, function(error, bits) {
-        cb(error, bits);
+    drawInstance.drawBitArray(text, function(error, bytes) {
+        cb(error, bytes);
     })
 }
 
-exports.drawBitArray = drawBitArray;
+module.exports.generate = drawBitArray;
