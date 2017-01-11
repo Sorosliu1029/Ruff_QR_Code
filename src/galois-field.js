@@ -9,7 +9,7 @@ var LOG_TABLE = new Buffer(256)
  *
  * ref {@link https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders#Introduction_to_mathematical_fields}
  */
-;(function initTables () {
+(function initTables() {
   var x = 1
   for (var i = 0; i < 255; i++) {
     EXP_TABLE[i] = x
@@ -39,7 +39,7 @@ var LOG_TABLE = new Buffer(256)
  * @param  {Number} n
  * @return {Number}
  */
-exports.log = function log (n) {
+exports.log = function log(n) {
   if (n < 1) throw new Error('log(' + n + ')')
   return LOG_TABLE[n]
 }
@@ -50,7 +50,7 @@ exports.log = function log (n) {
  * @param  {Number} n
  * @return {Number}
  */
-exports.exp = function exp (n) {
+exports.exp = function exp(n) {
   return EXP_TABLE[n]
 }
 
@@ -61,7 +61,7 @@ exports.exp = function exp (n) {
  * @param  {Number} y
  * @return {Number}
  */
-exports.mul = function mul (x, y) {
+exports.mul = function mul(x, y) {
   if (x === 0 || y === 0) return 0
 
   // should be EXP_TABLE[(LOG_TABLE[x] + LOG_TABLE[y]) % 255] if EXP_TABLE wasn't oversized

@@ -6,7 +6,7 @@ var ByteData = require('./byte-data')
 var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0)
 var G18_BCH = Utils.getBCHDigit(G18)
 
-var getBestVersionForDataLength = function getBestVersionForDataLength (length, errorCorrectionLevel) {
+var getBestVersionForDataLength = function getBestVersionForDataLength(length, errorCorrectionLevel) {
   for (var currentVersion = 1; currentVersion <= 40; currentVersion++) {
     if (length <= exports.getCapacity(currentVersion, errorCorrectionLevel)) return currentVersion
   }
@@ -20,7 +20,7 @@ var getBestVersionForDataLength = function getBestVersionForDataLength (length, 
  * @param  {Number}  version QR Code version
  * @return {Boolean}         true if valid version, false otherwise
  */
-exports.isValidVersion = function isValidVersion (version) {
+exports.isValidVersion = function isValidVersion(version) {
   return !isNaN(version) && version >= 1 && version <= 40
 }
 
@@ -32,7 +32,7 @@ exports.isValidVersion = function isValidVersion (version) {
  * @param  {Number} errorCorrectionLevel Error correction level
  * @return {Number}                      Quantity of storable data
  */
-exports.getCapacity = function getCapacity (version, errorCorrectionLevel) {
+exports.getCapacity = function getCapacity(version, errorCorrectionLevel) {
   if (!exports.isValidVersion(version)) {
     throw new Error('Invalid QR Code version')
   }
@@ -60,7 +60,7 @@ exports.getCapacity = function getCapacity (version, errorCorrectionLevel) {
  * @param  {Number} [errorCorrectionLevel=H] Error correction level
  * @return {Number}                          QR Code version
  */
-exports.getBestVersionForData = function getBestVersionForData (data, errorCorrectionLevel) {
+exports.getBestVersionForData = function getBestVersionForData(data, errorCorrectionLevel) {
   var dataLength
 
   if (data instanceof ByteData) dataLength = data.getLength()
@@ -84,7 +84,7 @@ exports.getBestVersionForData = function getBestVersionForData (data, errorCorre
  * @param  {Number} version QR Code version
  * @return {Number}         Encoded version info bits
  */
-exports.getEncodedBits = function getEncodedBits (version) {
+exports.getEncodedBits = function getEncodedBits(version) {
   if (!exports.isValidVersion(version) || version < 7) {
     throw new Error('Invalid QR Code version')
   }

@@ -24,7 +24,7 @@ var getSymbolSize = require('./utils').getSymbolSize
  * @param  {Number} version QR Code version
  * @return {Array}          Array of coordinate
  */
-exports.getRowColCoords = function getRowColCoords (version) {
+exports.getRowColCoords = function getRowColCoords(version) {
   if (version === 1) return []
 
   var posCount = Math.floor(version / 7) + 2
@@ -61,7 +61,7 @@ exports.getRowColCoords = function getRowColCoords (version) {
  * @param  {Number} version QR Code version
  * @return {Array}          Array of coordinates
  */
-exports.getPositions = function getPositions (version) {
+exports.getPositions = function getPositions(version) {
   var coords = []
   var pos = exports.getRowColCoords(version)
   var posLength = pos.length
@@ -69,9 +69,9 @@ exports.getPositions = function getPositions (version) {
   for (var i = 0; i < posLength; i++) {
     for (var j = 0; j < posLength; j++) {
       // Skip if position is occupied by finder patterns
-      if (i === 0 && j === 0 ||             // top-left
-          i === 0 && j === posLength - 1 || // bottom-left
-          i === posLength - 1 && j === 0) { // top-right
+      if (i === 0 && j === 0 || // top-left
+        i === 0 && j === posLength - 1 || // bottom-left
+        i === posLength - 1 && j === 0) { // top-right
         continue
       }
 

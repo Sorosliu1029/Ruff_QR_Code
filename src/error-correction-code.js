@@ -1,6 +1,5 @@
-
 var EC_BLOCKS_TABLE = [
-// L  M  Q  H
+  // L  M  Q  H
   1, 1, 1, 1,
   1, 1, 1, 1,
   1, 1, 2, 2,
@@ -44,7 +43,7 @@ var EC_BLOCKS_TABLE = [
 ]
 
 var EC_CODEWORDS_TABLE = [
-// L  M  Q  H
+  // L  M  Q  H
   7, 10, 13, 17,
   10, 16, 22, 28,
   15, 26, 36, 44,
@@ -95,7 +94,7 @@ var EC_CODEWORDS_TABLE = [
  * @param  {Number} errorCorrectionLevel Error correction level
  * @return {Number}                      Number of error correction blocks
  */
-exports.getBlocksCount = function getBlocksCount (version, errorCorrectionLevel) {
+exports.getBlocksCount = function getBlocksCount(version, errorCorrectionLevel) {
   switch (errorCorrectionLevel) {
     case 1:
       return EC_BLOCKS_TABLE[(version - 1) * 4 + 0]
@@ -118,7 +117,7 @@ exports.getBlocksCount = function getBlocksCount (version, errorCorrectionLevel)
  * @param  {Number} errorCorrectionLevel Error correction level
  * @return {Number}                      Number of error correction codewords
  */
-exports.getTotalCodewordsCount = function getTotalCodewordsCount (version, errorCorrectionLevel) {
+exports.getTotalCodewordsCount = function getTotalCodewordsCount(version, errorCorrectionLevel) {
   switch (errorCorrectionLevel) {
     case 1:
       return EC_CODEWORDS_TABLE[(version - 1) * 4 + 0]

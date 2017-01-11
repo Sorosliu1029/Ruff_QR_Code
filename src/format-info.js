@@ -14,7 +14,7 @@ var G15_BCH = Utils.getBCHDigit(G15)
  * @param  {Number} mask                 Mask pattern
  * @return {Number}                      Encoded format information bits
  */
-exports.getEncodedBits = function getEncodedBits (errorCorrectionLevel, mask) {
+exports.getEncodedBits = function getEncodedBits(errorCorrectionLevel, mask) {
   var data = ((errorCorrectionLevel << 3) | mask)
   var d = data << 10
 

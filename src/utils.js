@@ -12,7 +12,7 @@ var CODEWORDS_COUNT = [
  * @param  {Number} version QR Code version
  * @return {Number}         size of QR code
  */
-exports.getSymbolSize = function getSymbolSize (version) {
+exports.getSymbolSize = function getSymbolSize(version) {
   if (!version) throw new Error('"version" cannot be null or undefined')
   if (version < 1 || version > 40) throw new Error('"version" should be in range from 1 to 40')
   return version * 4 + 17
@@ -24,7 +24,7 @@ exports.getSymbolSize = function getSymbolSize (version) {
  * @param  {Number} version QR Code version
  * @return {Number}         Data length in bits
  */
-exports.getSymbolTotalCodewords = function getSymbolTotalCodewords (version) {
+exports.getSymbolTotalCodewords = function getSymbolTotalCodewords(version) {
   return CODEWORDS_COUNT[version]
 }
 

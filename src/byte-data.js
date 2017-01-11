@@ -1,11 +1,11 @@
 var Mode = require('./mode')
 
-function ByteData (data) {
+function ByteData(data) {
   this.mode = Mode.BYTE
   this.data = new Buffer(data)
 }
 
-ByteData.getCharCountIndicator = function getCharCountIndicator (version) {
+ByteData.getCharCountIndicator = function getCharCountIndicator(version) {
   if (version >= 1 && version < 10) {
     // 1 - 9
     return 8

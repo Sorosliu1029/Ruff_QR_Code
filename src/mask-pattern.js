@@ -31,7 +31,7 @@ var PenalityScores = {
  * Points: N1 + i
  * i is the amount by which the number of adjacent modules of the same color exceeds 5
  */
-function getPenalityN1 (data) {
+function getPenalityN1(data) {
   var size = data.size
   var points = 0
 
@@ -65,7 +65,7 @@ function getPenalityN1 (data) {
  *
  * Points: N2 * (m - 1) * (n - 1)
  */
-function getPenalityN2 (data) {
+function getPenalityN2(data) {
   var size = data.size
   var points = 0
 
@@ -73,10 +73,10 @@ function getPenalityN2 (data) {
     for (var col = 0; col < size - 1; col++) {
       var count = 0
       if (data.get(row, col)) count++
-      if (data.get(row + 1, col)) count++
-      if (data.get(row, col + 1)) count++
-      if (data.get(row + 1, col + 1)) count++
-      if (count === 0 || count === 4) points += PenalityScores.N2
+        if (data.get(row + 1, col)) count++
+          if (data.get(row, col + 1)) count++
+            if (data.get(row + 1, col + 1)) count++
+              if (count === 0 || count === 4) points += PenalityScores.N2
     }
   }
 
@@ -89,7 +89,7 @@ function getPenalityN2 (data) {
  *
  * Points: N3 * number of pattern found
  */
-function getPenalityN3 (data) {
+function getPenalityN3(data) {
   var size = data.size
   var points = 0
   var row, col
@@ -97,12 +97,12 @@ function getPenalityN3 (data) {
   for (row = 0; row < size; row++) {
     for (col = 0; col < size - 6; col++) {
       if (data.get(row, col) &&
-         !data.get(row, col + 1) &&
-          data.get(row, col + 2) &&
-          data.get(row, col + 3) &&
-          data.get(row, col + 4) &&
-         !data.get(row, col + 5) &&
-          data.get(row, col + 6)) {
+        !data.get(row, col + 1) &&
+        data.get(row, col + 2) &&
+        data.get(row, col + 3) &&
+        data.get(row, col + 4) &&
+        !data.get(row, col + 5) &&
+        data.get(row, col + 6)) {
         points += PenalityScores.N3
       }
     }
@@ -111,12 +111,12 @@ function getPenalityN3 (data) {
   for (col = 0; col < size; col++) {
     for (row = 0; row < size - 6; row++) {
       if (data.get(row, col) &&
-         !data.get(row + 1, col) &&
-          data.get(row + 2, col) &&
-          data.get(row + 3, col) &&
-          data.get(row + 4, col) &&
-         !data.get(row + 5, col) &&
-          data.get(row + 6, col)) {
+        !data.get(row + 1, col) &&
+        data.get(row + 2, col) &&
+        data.get(row + 3, col) &&
+        data.get(row + 4, col) &&
+        !data.get(row + 5, col) &&
+        data.get(row + 6, col)) {
         points += PenalityScores.N3
       }
     }
@@ -133,7 +133,7 @@ function getPenalityN3 (data) {
  * k is the rating of the deviation of the proportion of dark modules
  * in the symbol from 50% in steps of 5%
  */
-function getPenalityN4 (data) {
+function getPenalityN4(data) {
   var darkCount = 0
   var size = data.size
 
@@ -155,18 +155,27 @@ function getPenalityN4 (data) {
  * @param  {Number} j           Column
  * @return {Boolean}            Mask value
  */
-function getMaskAt (maskPattern, i, j) {
+function getMaskAt(maskPattern, i, j) {
   switch (maskPattern) {
-    case exports.Patterns.PATTERN000: return (i + j) % 2 === 0
-    case exports.Patterns.PATTERN001: return i % 2 === 0
-    case exports.Patterns.PATTERN010: return j % 3 === 0
-    case exports.Patterns.PATTERN011: return (i + j) % 3 === 0
-    case exports.Patterns.PATTERN100: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0
-    case exports.Patterns.PATTERN101: return (i * j) % 2 + (i * j) % 3 === 0
-    case exports.Patterns.PATTERN110: return ((i * j) % 2 + (i * j) % 3) % 2 === 0
-    case exports.Patterns.PATTERN111: return ((i * j) % 3 + (i + j) % 2) % 2 === 0
+    case exports.Patterns.PATTERN000:
+      return (i + j) % 2 === 0
+    case exports.Patterns.PATTERN001:
+      return i % 2 === 0
+    case exports.Patterns.PATTERN010:
+      return j % 3 === 0
+    case exports.Patterns.PATTERN011:
+      return (i + j) % 3 === 0
+    case exports.Patterns.PATTERN100:
+      return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0
+    case exports.Patterns.PATTERN101:
+      return (i * j) % 2 + (i * j) % 3 === 0
+    case exports.Patterns.PATTERN110:
+      return ((i * j) % 2 + (i * j) % 3) % 2 === 0
+    case exports.Patterns.PATTERN111:
+      return ((i * j) % 3 + (i + j) % 2) % 2 === 0
 
-    default: throw new Error('bad maskPattern:' + maskPattern)
+    default:
+      throw new Error('bad maskPattern:' + maskPattern)
   }
 }
 
@@ -176,7 +185,7 @@ function getMaskAt (maskPattern, i, j) {
  * @param  {Number}    pattern Pattern reference number
  * @param  {BitMatrix} data    BitMatrix data
  */
-exports.applyMask = function applyMask (pattern, data) {
+exports.applyMask = function applyMask(pattern, data) {
   var size = data.size
 
   for (var col = 0; col < size; col++) {
@@ -193,7 +202,7 @@ exports.applyMask = function applyMask (pattern, data) {
  * @param  {BitMatrix} data
  * @return {Number} Mask pattern reference number
  */
-exports.getBestMask = function getBestMask (data) {
+exports.getBestMask = function getBestMask(data) {
   var numPatterns = Object.keys(exports.Patterns).length
   var bestPattern = 0
   var lowerPenality = Infinity

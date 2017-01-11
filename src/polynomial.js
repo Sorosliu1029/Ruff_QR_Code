@@ -7,7 +7,7 @@ var GF = require('./galois-field')
  * @param  {Buffer} p2 Polynomial
  * @return {Buffer}    Product of p1 and p2
  */
-exports.mul = function mul (p1, p2) {
+exports.mul = function mul(p1, p2) {
   var coeff = new Buffer(p1.length + p2.length - 1)
   coeff.fill(0)
 
@@ -27,7 +27,7 @@ exports.mul = function mul (p1, p2) {
  * @param  {Buffer} divisor  Polynomial
  * @return {Buffer}          Remainder
  */
-exports.mod = function mod (divident, divisor) {
+exports.mod = function mod(divident, divisor) {
   var result = new Buffer(divident)
 
   while ((result.length - divisor.length) >= 0) {
@@ -40,7 +40,7 @@ exports.mod = function mod (divident, divisor) {
     // remove all zeros from buffer head
     var offset = 0
     while (offset < result.length && result[offset] === 0) offset++
-    result = result.slice(offset)
+      result = result.slice(offset)
   }
 
   return result
@@ -53,7 +53,7 @@ exports.mod = function mod (divident, divisor) {
  * @param  {Number} degree Degree of the generator polynomial
  * @return {Buffer}        Buffer containing polynomial coefficients
  */
-exports.generateECPolynomial = function generateECPolynomial (degree) {
+exports.generateECPolynomial = function generateECPolynomial(degree) {
   var poly = new Buffer([1])
   for (var i = 0; i < degree; i++) {
     poly = exports.mul(poly, [1, GF.exp(i)])

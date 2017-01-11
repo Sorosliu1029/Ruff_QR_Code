@@ -8,7 +8,7 @@ var FINDER_PATTERN_SIZE = 7
  * @param  {Number} version QR Code version
  * @return {Array}          Array of coordinates
  */
-exports.getPositions = function getPositions (version) {
+exports.getPositions = function getPositions(version) {
   var size = getSymbolSize(version)
 
   return [

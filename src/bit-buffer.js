@@ -1,4 +1,4 @@
-function BitBuffer () {
+function BitBuffer() {
   this.buffer = []
   this.length = 0
 }

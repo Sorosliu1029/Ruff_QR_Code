@@ -17,7 +17,7 @@ module.exports = QRCode;
  * @param {Number} version              QR Code version
  * @param {Number} errorCorrectionLevel Error correction level
  */
-function QRCode (version, errorCorrectionLevel) {
+function QRCode(version, errorCorrectionLevel) {
   this.version = version
   this.errorCorrectionLevel = errorCorrectionLevel
   this.modules = null
@@ -31,7 +31,7 @@ function QRCode (version, errorCorrectionLevel) {
  *
  * @return {Number} size
  */
-QRCode.prototype.getModuleCount = function getModuleCount () {
+QRCode.prototype.getModuleCount = function getModuleCount() {
   return this.moduleCount
 }
 
@@ -40,7 +40,7 @@ QRCode.prototype.getModuleCount = function getModuleCount () {
  *
  * @param {String, Number, Array, Buffer} data
  */
-QRCode.prototype.addData = function addData (data) {
+QRCode.prototype.addData = function addData(data) {
   if (this.data) this.data.append(data)
   else this.data = new ByteData(data)
 
@@ -54,7 +54,7 @@ QRCode.prototype.addData = function addData (data) {
  * @param  {Number}  col Column
  * @return {Boolean}     Module value (black/white)
  */
-QRCode.prototype.isDark = function isDark (row, col) {
+QRCode.prototype.isDark = function isDark(row, col) {
   if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
     throw new Error(row + ',' + col)
   }
@@ -70,7 +70,7 @@ QRCode.prototype.isDark = function isDark (row, col) {
  * @param  {ByteData} data                 Data input
  * @return {Buffer}                        Buffer containing encoded codewords
  */
-function createData (version, errorCorrectionLevel, data) {
+function createData(version, errorCorrectionLevel, data) {
   // Prepare data buffer
   var buffer = new BitBuffer()
 
@@ -131,7 +131,7 @@ function createData (version, errorCorrectionLevel, data) {
  * @param  {Number}    errorCorrectionLevel Error correction level
  * @return {Buffer}                         Buffer containing encoded codewords
  */
-function createCodewords (bitBuffer, version, errorCorrectionLevel) {
+function createCodewords(bitBuffer, version, errorCorrectionLevel) {
   // Total codewords for this QR code version (Data + Error correction)
   var totalCodewords = Utils.getSymbolTotalCodewords(version)
 
@@ -212,7 +212,7 @@ function createCodewords (bitBuffer, version, errorCorrectionLevel) {
  * @param  {BitMatrix} matrix  Modules matrix
  * @param  {Number}    version QR Code version
  */
-function setupFinderPattern (matrix, version) {
+function setupFinderPattern(matrix, version) {
   var size = matrix.size
   var pos = FinderPattern.getPositions(version)
 
@@ -245,7 +245,7 @@ function setupFinderPattern (matrix, version) {
  *
  * @param  {BitMatrix} matrix Modules matrix
  */
-function setupTimingPattern (matrix) {
+function setupTimingPattern(matrix) {
   var size = matrix.size
 
   for (var r = 8; r < size - 8; r++) {
@@ -263,7 +263,7 @@ function setupTimingPattern (matrix) {
  * @param  {BitMatrix} matrix  Modules matrix
  * @param  {Number}    version QR Code version
  */
-function setupAlignmentPattern (matrix, version) {
+function setupAlignmentPattern(matrix, version) {
   var pos = AlignmentPattern.getPositions(version)
 
   for (var i = 0; i < pos.length; i++) {
@@ -290,7 +290,7 @@ function setupAlignmentPattern (matrix, version) {
  * @param  {Number}    version QR Code version
  * @param  {Boolean}   reserve If true, marks bits as reserved and set their values to 0
  */
-function setupVersionInfo (matrix, version, reserve) {
+function setupVersionInfo(matrix, version, reserve) {
   var size = matrix.size
   var bits = Version.getEncodedBits(version)
   var row, col, mod
@@ -313,7 +313,7 @@ function setupVersionInfo (matrix, version, reserve) {
  * @param  {Number}    maskPattern          Mask pattern reference value
  * @param  {Boolean}   reserve              If true, marks bits as reserved and set their values to 0
  */
-function setupFormatInfo (matrix, errorCorrectionLevel, maskPattern, reserve) {
+function setupFormatInfo(matrix, errorCorrectionLevel, maskPattern, reserve) {
   var size = matrix.size
   var bits = FormatInfo.getEncodedBits(errorCorrectionLevel, maskPattern)
   var i, mod
@@ -350,7 +350,7 @@ function setupFormatInfo (matrix, errorCorrectionLevel, maskPattern, reserve) {
  * @param  {BitMatrix} matrix Modules matrix
  * @param  {Buffer}    data   Data codewords
  */
-function setupData (matrix, data) {
+function setupData(matrix, data) {
   var size = matrix.size
   var inc = -1
   var row = size - 1
@@ -360,40 +360,40 @@ function setupData (matrix, data) {
   for (var col = size - 1; col > 0; col -= 2) {
     if (col === 6) col--
 
-    while (true) {
-      for (var c = 0; c < 2; c++) {
-        if (!matrix.isReserved(row, col - c)) {
-          var dark = false
+      while (true) {
+        for (var c = 0; c < 2; c++) {
+          if (!matrix.isReserved(row, col - c)) {
+            var dark = false
 
-          if (byteIndex < data.length) {
-            dark = (((data[byteIndex] >>> bitIndex) & 1) === 1)
-          }
+            if (byteIndex < data.length) {
+              dark = (((data[byteIndex] >>> bitIndex) & 1) === 1)
+            }
 
-          matrix.set(row, col - c, dark)
-          bitIndex--
+            matrix.set(row, col - c, dark)
+            bitIndex--
 
-          if (bitIndex === -1) {
-            byteIndex++
-            bitIndex = 7
+            if (bitIndex === -1) {
+              byteIndex++
+              bitIndex = 7
+            }
           }
         }
-      }
 
-      row += inc
+        row += inc
 
-      if (row < 0 || size <= row) {
-        row -= inc
-        inc = -inc
-        break
+        if (row < 0 || size <= row) {
+          row -= inc
+          inc = -inc
+          break
+        }
       }
-    }
   }
 }
 
 /**
  * Build QR Code symbol
  */
-QRCode.prototype.make = function make () {
+QRCode.prototype.make = function make() {
   if (this.dataCache === null) {
     this.dataCache = createData(this.version, this.errorCorrectionLevel, this.data)
   }
