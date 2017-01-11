@@ -9,7 +9,7 @@ var LOG_TABLE = new Buffer(256)
  *
  * ref {@link https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders#Introduction_to_mathematical_fields}
  */
-(function initTables() {
+;(function initTables() {
   var x = 1
   for (var i = 0; i < 255; i++) {
     EXP_TABLE[i] = x
