@@ -51,12 +51,15 @@ generate qrcode from text, and display qrcode in callback function
 ## FAQ
 
 1. Which qrcode version is this module used?
-   This module uses version 2. The original qrcode is 25 * 25 pixel, and is magnified to 50 * 50 pixel.
+
+    This module uses version 2. The original qrcode is 25 * 25 pixel, and is magnified to 50 * 50 pixel.
    
 2. Which error correction level is this module used?
+
     This module uses L level correction, which means only 7% data error could be corrected.
     
 3. How many ascii characters could the `text` parameter contains?
+    
     The text could contain **32** characters at maximum.
     
 ## License
